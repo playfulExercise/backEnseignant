@@ -136,7 +136,7 @@ professeurs.post('/creationsUpdate', (req, res) => {
 professeurs.post('/register', (req, res) => {
     console.log("Professeur enregistre");
     const today = new Date();
-    const userData = {
+    const professeurData = {
         prenom_prof: req.body.prenom_prof,
         nom_prof: req.body.nom_prof,
         email_prof: req.body.email_prof,
@@ -146,7 +146,7 @@ professeurs.post('/register', (req, res) => {
         etablissement: req.body.etablissement,
         eleves: req.body.eleves
     }
-    Professeur.findOne({
+    Professeurs.findOne({
         email_prof: req.body.email_prof
     })
     .then(professeur => {
@@ -156,7 +156,7 @@ professeurs.post('/register', (req, res) => {
                 10,
                 (err, hash) => {
                     professeurData.password = hash;
-                    Professeur.create(professeurData)
+                    Professeurs.create(professeurData)
                     .then(professeur => {
                         res.json({
                             status: professeur.email_prof + 'enregistrement ok!'

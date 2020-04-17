@@ -30,5 +30,4 @@ app.use(
 )
 
 var Professeurs = require('./routes/Professeurs.js');
-
 app.use('/professeurs', Professeurs);

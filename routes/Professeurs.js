@@ -10,7 +10,7 @@ professeurs.use(cors());
 
 process.env.SECRET_KEY = 'secret';
 
-professeurs.post('/creationsList', (req, res) => {
+/*professeurs.post('/creationsList', (req, res) => {
     
     const userData = {
         nomProduit: req.body.nomProduit,
@@ -132,39 +132,34 @@ professeurs.post('/creationsUpdate', (req, res) => {
             res.send({error: "creation update : err"})
         });
 })
-
+*/
 professeurs.post('/register', (req, res) => {
-    console.log("User registered");
+    console.log("Professeur enregistre");
     const today = new Date();
     const userData = {
-        prenomArtisan: req.body.prenomArtisan,
-        nomArtisan: req.body.nomArtisan,
-        emailArtisan: req.body.emailArtisan,
+        prenom_prof: req.body.prenom_prof,
+        nom_prof: req.body.nom_prof,
+        email_prof: req.body.email_prof,
         password: req.body.password,
         created: today,
-        creations: req.body.creations,
-        telephoneArtisan: req.body.telephoneArtisan,
-        plateformeArtisan: req.body.plateformeArtisan,
-        sloganArtisan: req.body.sloganArtisan,
-        savoirFaireArtisan: req.body.savoirFaireArtisan,
-        histoireArtisan: req.body.histoireArtisan,
-        engagementEcoFriendlyArtisan: req.body.engagementEcoFriendlyArtisan,
-        surMesureArtisan: req.body.surMesureArtisan
+        departement: req.body.departement,
+        etablissement: req.body.etablissement,
+        eleves: req.body.eleves
     }
-    User.findOne({
-        emailArtisan: req.body.emailArtisan
+    Professeur.findOne({
+        email_prof: req.body.email_prof
     })
-    .then(user => {
-        if (!user) {
+    .then(professeur => {
+        if (!professeur) {
             bcrypt.hash(
                 req.body.password,
                 10,
                 (err, hash) => {
-                    userData.password = hash;
-                    User.create(userData)
-                    .then(user => {
+                    professeurData.password = hash;
+                    Professeur.create(professeurData)
+                    .then(professeur => {
                         res.json({
-                            status: user.emailArtisan + 'registered!'
+                            status: professeur.email_prof + 'enregistrement ok!'
                         })
                     })
                     .catch(err => {
@@ -172,14 +167,14 @@ professeurs.post('/register', (req, res) => {
                     })
             })
         } else {
-            res.json({error: 'User already exists'})
+            res.json({error: 'Professeur already exists'})
         }
     })
     .catch(err => {
         res.send('error: ' + err)
     })
 })
-
+/*
 professeurs.post('/login', (req, res) => {
     User.findOne({
         emailArtisan: req.body.emailArtisan
@@ -228,6 +223,6 @@ professeurs.get('/profile', (req, res) => {
     .catch(err => {
         res.send('error: ' + err);
     })
-})
+})*/
 
 module.exports = professeurs

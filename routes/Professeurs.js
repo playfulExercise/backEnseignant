@@ -174,29 +174,29 @@ professeurs.post('/register', (req, res) => {
         res.send('error: ' + err)
     })
 })
-/*
+
 professeurs.post('/login', (req, res) => {
-    User.findOne({
-        emailArtisan: req.body.emailArtisan
+    Professeur.findOne({
+        email_prof: req.body.email_prof
     })
-    .then(user => {
-        if (user) {
-            if (bcrypt.compareSync(req.body.password, user.password)) {
+    .then(professeur => {
+        if (professeur) {
+            if (bcrypt.compareSync(req.body.password, professeur.password)) {
                 const payload = {
-                    _id: user._id,
-                    prenomArtisan: user.prenomArtisan,
-                    nomArtisan: user.nomArtisan,
-                    emailArtisan: user.emailArtisan
+                    _id: professeur._id,
+                    prenom_prof: professeur.prenom_prof,
+                    nom_prof: professeur.nom_prof,
+                    email_prof: professeur.email_prof
                 }
                 let token = jwt.sign(payload, process.env.SECRET_KEY, {
                     expiresIn: 1440
                 })
                 res.send(token);
             } else {
-                res.json({error: "User does not exist"});
+                res.json({error: "Professeur does not exist"});
             }
         } else {
-            res.json({error: "User does not exist"});
+            res.json({error: "Professeur does not exist"});
         }
     })
     .catch(err => {
@@ -210,12 +210,12 @@ professeurs.get('/profile', (req, res) => {
         process. env.SECRET_KEY
     )
 
-    User.findOne({
+    Professeur.findOne({
         _id: decoded._id
     })
-    .then(user => {
-        if (user) {
-            res.json(user);
+    .then(professeur => {
+        if (professeur) {
+            res.json(professeur);
         } else {
             res.send("User does not exist");
         }
@@ -223,6 +223,6 @@ professeurs.get('/profile', (req, res) => {
     .catch(err => {
         res.send('error: ' + err);
     })
-})*/
+})
 
 module.exports = professeurs

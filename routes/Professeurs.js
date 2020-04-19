@@ -176,7 +176,7 @@ professeurs.post('/register', (req, res) => {
 })
 
 professeurs.post('/login', (req, res) => {
-    Professeur.findOne({
+    Professeurs.findOne({
         email_prof: req.body.email_prof
     })
     .then(professeur => {
@@ -210,7 +210,7 @@ professeurs.get('/profile', (req, res) => {
         process. env.SECRET_KEY
     )
 
-    Professeur.findOne({
+    Professeurs.findOne({
         _id: decoded._id
     })
     .then(professeur => {

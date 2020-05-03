@@ -39,7 +39,7 @@ const ProfesseurSchema = new Schema ({
         pseudo_eleve: {
             type: String
         },
-        pass_eleve: {
+        code_eleve: {
             type: String
         },
         id_prof: {

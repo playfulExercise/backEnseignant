@@ -10,40 +10,28 @@ professeurs.use(cors());
 
 process.env.SECRET_KEY = 'secret';
 
-/*professeurs.post('/creationsList', (req, res) => {
+professeurs.post('/elevesList', (req, res) => {
     
-    const userData = {
-        nomProduit: req.body.nomProduit,
-        descriptionProduit: req.body.descriptionProduit,
-        gainEnvironnement: req.body.gainEnvironnement,
-        categorieProduit: req.body.categorieProduit,
-        styleProduit: req.body.styleProduit,
-        materiauProduit: req.body.materiauProduit,
-        couleurProduit: req.body.couleurProduit,
-        anneeConceptionProduit: req.body.anneeConceptionProduit,
-        hauteurProduit: req.body.hauteurProduit,
-        poidsProduit: req.body.poidsProduit,
-        largeurProduit: req.body.largeurProduit,
-        longueurProduit: req.body.longueurProduit,
-        prixTTCProduit: req.body.prixTTCProduit,
-        prixLivraisonProduit: req.body.prixLivraisonProduit,
-        retraitAtelierProduit: req.body.retraitAtelierProduit,
-        lieuFabricationProduit: req.body.lieuFabricationProduit,
-        stock: req.body.stock
+    const professeurData = {
+        nom_eleve: req.body.nom_eleve,
+        prenom_eleve: req.body.prenom_eleve,
+        code_eleve: req.body.code_eleve,
+        _id: req.body._id,
     }
-    User.findOneAndUpdate (
+    console.log(professeurData);
+    Professeurs.findOneAndUpdate (
         { _id : req.body._id},
         {$push :
-            { creations: userData }}
+            { eleves: professeurData }}
     ).then(added => {
         if(added){
-            res.send({success: "creation update success"});
+            res.send({success: "eleve added success"});
         }
     }).catch(err => {
-        res.send({error: "creation added : err"})
+        res.send({error: "eleve added : err"})
     });
 })
-
+/*
 professeurs.post('/creations', (req, res) => {
     User.findOne (
         {emailArtisan : req.body.emailArtisan,}
@@ -70,7 +58,7 @@ professeurs.post('/creationSpecifique', (req, res) => {
 
 professeurs.post('/creationDelete', (req, res) => {
 
-    User.findByIdAndUpdate(
+    Professeurs.findByIdAndUpdate(
     {_id : req.body.userId},
        { $pull: { 'creations': {  _id: req.body._id } } }
     ).then(response => {
@@ -105,7 +93,7 @@ professeurs.post('/creationsUpdate', (req, res) => {
         _id: req.body._id,
         creationId: req.body.creationId
     }
-    User.update(
+    Professeurs.update(
         { "_id" : userData._id, "creations._id": userData.creationId }, 
         { "$set": {
         'creations.$.nomProduit':  userData.nomProduit,

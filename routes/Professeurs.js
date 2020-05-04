@@ -18,7 +18,6 @@ professeurs.post('/elevesList', (req, res) => {
         code_eleve: req.body.code_eleve,
         _id: req.body._id,
     }
-    console.log(professeurData);
     Professeurs.findOneAndUpdate (
         { _id : req.body._id},
         {$push :
@@ -205,7 +204,7 @@ professeurs.get('/profile', (req, res) => {
         if (professeur) {
             res.json(professeur);
         } else {
-            res.send("User does not exist");
+            res.send("Professeur does not exist");
         }
     })
     .catch(err => {
@@ -213,4 +212,13 @@ professeurs.get('/profile', (req, res) => {
     })
 })
 
+professeurs.post('/eleves/all', (req, res) => {
+    Professeurs.findOne (
+        {_id : req.body._id,}
+    ).then(user => {
+        if(user){
+            res.send(user.eleves);
+        }
+    })
+})
 module.exports = professeurs

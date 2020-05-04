@@ -16,7 +16,7 @@ professeurs.post('/elevesList', (req, res) => {
         nom_eleve: req.body.nom_eleve,
         prenom_eleve: req.body.prenom_eleve,
         code_eleve: req.body.code_eleve,
-        _id: req.body._id,
+        id_prof: req.body._id
     }
     Professeurs.findOneAndUpdate (
         { _id : req.body._id},

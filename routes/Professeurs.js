@@ -30,6 +30,26 @@ professeurs.post('/elevesList', (req, res) => {
         res.send({error: "eleve added : err"})
     });
 })
+
+professeurs.post('/eleves/delete', (req, res) => {
+    const professeurData = {
+        _id: req.body._id,
+        listElevesDelete: req.body.listElevesDelete,
+    }
+    console.log(professeurData);
+    Professeurs.update(
+        { "_id" : professeurData._id }, 
+        { "$set": {
+        'listElevesDelete':  professeurData.listElevesDelete
+    }}).then(upd => {
+        if(upd){
+            res.send({success: "eleve(s) delete success"});
+        }
+    }).catch(err => {
+        res.send({error: "eleve(s) delete error"})
+    });
+})
+
 /*
 professeurs.post('/creations', (req, res) => {
     User.findOne (
@@ -221,4 +241,5 @@ professeurs.post('/eleves/all', (req, res) => {
         }
     })
 })
+
 module.exports = professeurs

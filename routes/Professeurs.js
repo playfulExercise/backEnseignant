@@ -36,19 +36,18 @@ professeurs.post('/eleves/delete', (req, res) => {
         _id: req.body._id,
         listElevesDelete: req.body.listElevesDelete,
     }
-    console.log(professeurData);
-    Professeurs.update(
-        { "_id" : professeurData._id }, 
-        { "$set": {
-        'listElevesDelete':  professeurData.listElevesDelete
-    }}).then(upd => {
-        if(upd){
-            res.send({success: "eleve(s) delete success"});
-        }
-    }).catch(err => {
-        res.send({error: "eleve(s) delete error"})
-    });
+    //professeurData.listElevesDelete.map(x => console.log(x));
+    Professeurs.findByIdAndUpdate(
+        {_id : professeurData._id},
+        { $pull: { 'eleves': {  _id: professeurData.listElevesDelete } } }
+        ).then(response => {
+            res.json({success: "eleve(s) delete - success !"});
+        })
+        .catch(err => {
+            res.send({error: "eleve(s) delete - error ! "})
+        });
 })
+
 
 /*
 professeurs.post('/creations', (req, res) => {

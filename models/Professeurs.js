@@ -51,7 +51,15 @@ const ProfesseurSchema = new Schema ({
             default: Date.now
         }
     }],
-    configuration_monde: [],
+    configuration_monde: {
+        nb_donjons: 0,
+        francais: 0,
+        maths: 0,
+        histoire: 0,
+        geographie: 0,
+        anglais: 0
+    },
+    infos: {}
 })
 
 module.exports = User = mongoose.model('professeurs', ProfesseurSchema);

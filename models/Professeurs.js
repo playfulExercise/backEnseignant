@@ -52,12 +52,34 @@ const ProfesseurSchema = new Schema ({
         }
     }],
     configuration_monde: {
-        nb_donjons: 0,
-        francais: 0,
-        maths: 0,
-        histoire: 0,
-        geographie: 0,
-        anglais: 0
+        nb_donjons: {
+            type: Number,
+            default: 0
+        },
+        francais: {
+            type: Number,
+            default: 0
+        },
+        maths: {
+            type: Number,
+            default: 0
+        },
+        histoire: {
+            type: Number,
+            default: 0
+        },
+        geographie: {
+            type: Number,
+            default: 0
+        },
+        anglais: {
+            type: Number,
+            default: 0
+        },
+        date_creation_monde: {
+            type: Date,
+            default: Date.now
+        }
     },
     infos: {}
 })

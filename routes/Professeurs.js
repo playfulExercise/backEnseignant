@@ -31,6 +31,7 @@ professeurs.post('/elevesList', (req, res) => {
     });
 })
 
+
 professeurs.post('/eleves/delete', (req, res) => {
     const professeurData = {
         _id: req.body._id,
@@ -237,6 +238,16 @@ professeurs.post('/eleves/all', (req, res) => {
     ).then(user => {
         if(user){
             res.send(user.eleves);
+        }
+    })
+})
+
+professeurs.post('/monde', (req, res) => {
+    Professeurs.findOne (
+        {_id : req.body._id,}
+    ).then(user => {
+        if(user){
+            res.send(user.configuration_monde);
         }
     })
 })

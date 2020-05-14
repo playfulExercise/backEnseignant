@@ -252,4 +252,23 @@ professeurs.post('/monde', (req, res) => {
     })
 })
 
+professeurs.post('/monde/set', (req, res) => {
+    const User = {
+        _id: req.body._id,
+        configuration_monde: req.body.configuration_monde,
+    }
+    Professeurs.updateOne(
+        { "_id" : User._id }, 
+        { "$set": {
+        'configuration_monde':  User.configuration_monde
+    }}).then(upd => {
+        if(upd){
+            res.send({success: "configuration_monde update : ok"});
+        }
+    }).catch(err => {
+        res.send({error: "configuration_monde update : err"})
+    });
+})
+
+
 module.exports = professeurs

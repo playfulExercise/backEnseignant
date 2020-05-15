@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const ProfesseurSchema = new Schema ({
+const ProfesseurSchema = new Schema({
     prenom_prof: {
         type: String
     },
@@ -15,7 +15,7 @@ const ProfesseurSchema = new Schema ({
     },
     password: {
         type: String,
-        required: true 
+        required: true
     },
     date: {
         type: Date,
@@ -45,7 +45,27 @@ const ProfesseurSchema = new Schema ({
         id_prof: {
             type: ObjectId
         },
-        progression: [],
+        infos: {
+            progression_monde: {
+                type: Number,
+                default: 0
+            },
+            nb_pieces: {
+                type: Number,
+                default: 0
+            },
+            matieres: [{
+                nom_matiere: {
+                    type: String
+                },
+                nb_donjons: {
+                    type: Number
+                },
+                nb_donjons_finis: {
+                    type: Number
+                }
+            }]
+        },
         createdAt: {
             type: Date,
             default: Date.now
@@ -80,8 +100,7 @@ const ProfesseurSchema = new Schema ({
             type: Date,
             default: Date.now
         }
-    },
-    infos: {}
+    }
 })
 
 module.exports = User = mongoose.model('professeurs', ProfesseurSchema);

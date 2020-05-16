@@ -16,7 +16,8 @@ professeurs.post('/elevesList', (req, res) => {
         nom_eleve: req.body.nom_eleve,
         prenom_eleve: req.body.prenom_eleve,
         code_eleve: req.body.code_eleve,
-        id_prof: req.body._id
+        id_prof: req.body._id,
+        infos: req.body.infos,
     }
     Professeurs.findOneAndUpdate (
         { _id : req.body._id},
@@ -37,7 +38,6 @@ professeurs.post('/eleves/delete', (req, res) => {
         _id: req.body._id,
         listElevesDelete: req.body.listElevesDelete,
     }
-    //professeurData.listElevesDelete.map(x => console.log(x));
     Professeurs.findByIdAndUpdate(
         {_id : professeurData._id},
         { $pull: { 'eleves': {  _id: professeurData.listElevesDelete } } }
@@ -50,6 +50,23 @@ professeurs.post('/eleves/delete', (req, res) => {
 })
 
 
+professeurs.post('/monde/setInfos', (req, res) => {
+    const userData = {
+        _id: req.body._id,
+        infos: req.body.infos,
+    }
+    Professeurs.updateMany(
+        { "_id" : userData._id, "eleves":{"$exists":true, "$ne":[], "$not":{"$size":1}}}, 
+        { "$set": {
+        'eleves.$.infos':  userData.infos
+        }}).then(upd => {
+            if(upd){
+                res.send({success: "eleves update all success"});
+            }
+        }).catch(err => {
+            res.send({error: "eleves update all error"})
+        });
+})
 /*
 professeurs.post('/creations', (req, res) => {
     User.findOne (

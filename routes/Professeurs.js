@@ -58,8 +58,8 @@ professeurs.post('/monde/setInfos', (req, res) => {
     Professeurs.updateMany(
         { "_id" : userData._id, "eleves":{"$exists":true, "$ne":[], "$not":{"$size":1}}}, 
         { "$set": {
-        'eleves.$.infos':  userData.infos
-        }}).then(upd => {
+        'eleves.$[].infos':  userData.infos
+        }}, {multi : true}).then(upd => {
             if(upd){
                 res.send({success: "eleves update all success"});
             }
@@ -104,57 +104,6 @@ professeurs.post('/creationDelete', (req, res) => {
     .catch(err => {
         res.send({error: "creation delete - error ! "})
     });
-})
-
-professeurs.post('/creationsUpdate', (req, res) => {
-    const userData = {
-        nomProduit: req.body.nomProduit,
-        descriptionProduit: req.body.descriptionProduit,
-        gainEnvironnement: req.body.gainEnvironnement,
-        categorieProduit: req.body.categorieProduit,
-        styleProduit: req.body.styleProduit,
-        materiauProduit: req.body.materiauProduit,
-        couleurProduit: req.body.couleurProduit,
-        anneeConceptionProduit: req.body.anneeConceptionProduit,
-        hauteurProduit: req.body.hauteurProduit,
-        poidsProduit: req.body.poidsProduit,
-        largeurProduit: req.body.largeurProduit,
-        longueurProduit: req.body.longueurProduit,
-        prixTTCProduit: req.body.prixTTCProduit,
-        prixLivraisonProduit: req.body.prixLivraisonProduit,
-        retraitAtelierProduit: req.body.retraitAtelierProduit,
-        lieuFabricationProduit: req.body.lieuFabricationProduit,
-        stock: req.body.stock,
-
-        _id: req.body._id,
-        creationId: req.body.creationId
-    }
-    Professeurs.update(
-        { "_id" : userData._id, "creations._id": userData.creationId }, 
-        { "$set": {
-        'creations.$.nomProduit':  userData.nomProduit,
-        'creations.$.descriptionProduit': userData.descriptionProduit,
-        'creations.$.gainEnvironnement': userData.gainEnvironnement,
-        'creations.$.categorieProduit': userData.categorieProduit,
-        'creations.$.styleProduit': userData.styleProduit,
-        'creations.$.materiauProduit': userData.materiauProduit,
-        'creations.$.couleurProduit': userData.couleurProduit,
-        'creations.$.hauteurProduit': userData.hauteurProduit,
-        'creations.$.poidsProduit': userData.poidsProduit,
-        'creations.$.largeurProduit': userData.largeurProduit,
-        'creations.$.longueurProduit': userData.longueurProduit,
-        'creations.$.prixTTCProduit': userData.prixTTCProduit,
-        'creations.$.prixLivraisonProduit': userData.prixLivraisonProduit,
-        'creations.$.retraitAtelierProduit': userData.retraitAtelierProduit,
-        'creations.$.lieuFabricationProduit': userData.lieuFabricationProduit,
-        'creations.$.stock': userData.stock
-        }}).then(upd => {
-            if(upd){
-                res.send({success: "creation update success"});
-            }
-        }).catch(err => {
-            res.send({error: "creation update : err"})
-        });
 })
 */
 professeurs.post('/register', (req, res) => {

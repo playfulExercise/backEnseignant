@@ -67,6 +67,20 @@ professeurs.post('/monde/setInfos', (req, res) => {
             res.send({error: "eleves update all error"})
         });
 })
+professeurs.post('/eleveSpecifique', (req, res) => {
+    Professeurs.findOne (
+        {_id : req.body._id,}
+    ).then(user => {
+        if(user) {
+            user.eleves.map(eleves => {
+                if(eleves._id == req.body.eleves_id){
+                    res.send(eleves);
+                }
+            })
+        }
+    })
+})
+
 /*
 professeurs.post('/creations', (req, res) => {
     User.findOne (
@@ -74,20 +88,6 @@ professeurs.post('/creations', (req, res) => {
     ).then(user => {
         if(user){
             res.send(user.creations);
-        }
-    })
-})
-
-professeurs.post('/creationSpecifique', (req, res) => {
-    User.findOne (
-        {emailArtisan : req.body.emailArtisan,}
-    ).then(user => {
-        if(user) {
-            user.creations.map(crea => {
-                if(crea._id == req.body.creationId){
-                    res.send(crea);
-                }
-            })
         }
     })
 })

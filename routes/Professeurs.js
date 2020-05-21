@@ -117,7 +117,8 @@ professeurs.post('/register', (req, res) => {
         created: today,
         departement: req.body.departement,
         etablissement: req.body.etablissement,
-        eleves: req.body.eleves
+        eleves: req.body.eleves,
+        questions: req.body.questions
     }
     Professeurs.findOne({
         email_prof: req.body.email_prof

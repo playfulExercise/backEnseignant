@@ -100,7 +100,8 @@ const ProfesseurSchema = new Schema({
             type: Date,
             default: Date.now
         }
-    }
+    },
+    questions:[]
 })
 
 module.exports = User = mongoose.model('professeurs', ProfesseurSchema);

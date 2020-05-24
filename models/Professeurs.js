@@ -55,6 +55,7 @@ const ProfesseurSchema = new Schema({
                 default: 0
             },
             matieres: [{
+                _id: false,
                 nom_matiere: {
                     type: String
                 },

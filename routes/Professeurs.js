@@ -81,31 +81,6 @@ professeurs.post('/eleveSpecifique', (req, res) => {
     })
 })
 
-/*
-professeurs.post('/creations', (req, res) => {
-    User.findOne (
-        {emailArtisan : req.body.emailArtisan,}
-    ).then(user => {
-        if(user){
-            res.send(user.creations);
-        }
-    })
-})
-
-professeurs.post('/creationDelete', (req, res) => {
-
-    Professeurs.findByIdAndUpdate(
-    {_id : req.body.userId},
-       { $pull: { 'creations': {  _id: req.body._id } } }
-    ).then(response => {
-
-        res.json({success: "creation delete"});
-    })
-    .catch(err => {
-        res.send({error: "creation delete - error ! "})
-    });
-})
-*/
 professeurs.post('/register', (req, res) => {
     console.log("Professeur enregistre");
     const today = new Date();
